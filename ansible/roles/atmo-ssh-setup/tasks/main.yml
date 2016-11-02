@@ -1,22 +1,5 @@
 ---
 
-#- name: set flag for CentOS boxes
-#  set_fact: is_cent=True
-#  when: ansible_distribution == "CentOS"
-#  tags:
-#    - centos5
-
-#- name: set flag for CentOS 5 boxes
-#  set_fact: is_cent5=True
-#  when: ansible_distribution_major_version == "5"
-#  tags:
-#    - centos5
-
-- name: set python for centos-5
-  set_fact: ansible_python_interpreter=/usr/bin/python
-  tags: python
- # when: is_cent and is_cent5
-
 - name: get atmo vm ip address
   set_fact: vm_ip="{{ ansible_host }}"
 
