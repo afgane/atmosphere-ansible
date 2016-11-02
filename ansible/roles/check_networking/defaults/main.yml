@@ -4,3 +4,4 @@ SSH_PORT: 22
 SSH_PORT_TIMEOUT: 30
 SSH_TIMEOUT: 30
 
+debug_out: False
