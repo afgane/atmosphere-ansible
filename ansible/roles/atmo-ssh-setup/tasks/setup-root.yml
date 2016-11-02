@@ -5,6 +5,11 @@
   become: true
   remote_user: "{{ use_remote_user }}"
 
+- name: Install python 2 if needed
+  raw: test -e /usr/bin/python || (apt-get update && apt-get install -y python-minimal)
+  become: true
+  remote_user: "{{ use_remote_user }}"
+
 - name: remove the standard cloud disable command
   lineinfile: dest=/root/.ssh/authorized_keys state=absent regexp="command\="
   become: true
