@@ -211,13 +211,13 @@
 
 - name: restart dbus for Ubuntu < 16.04
   service: name=dbus state=restarted enabled=yes
-  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version < "16"
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int < 16
   tags:
     - restart-dbus
 
 - name: restart dbus for Ubuntu >= 16.04
   service: name=dbus state=reloaded enabled=yes
-  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version >= "16"
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int >= 16
   tags:
     - reload-dbus
 
@@ -230,11 +230,11 @@
 
 - name: restart dbus again just to be safe for Ubuntu < 16.04
   shell: service dbus restart
-  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version < "16"
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int < 16
 
 - name: reload dbus again just to be safe for Ubuntu >= 16.04
   shell: systemctl reload dbus
-  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version >= "16"
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int >= 16
 
 - name: loop until ldap connection is made, fails if it can't
   command: id {{ TEST_LDAP_USER }}
