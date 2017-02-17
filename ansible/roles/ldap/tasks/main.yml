@@ -209,13 +209,13 @@
   tags:
     - restart-nslcd
 
-- name: restart dbus for Ubuntu < 16.04
+- name: restart dbus for pre-Ubuntu 16.04
   service: name=dbus state=restarted enabled=yes
   when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int < 16
   tags:
     - restart-dbus
 
-- name: restart dbus for Ubuntu >= 16.04
+- name: restart dbus for Ubuntu 16.04 and later
   service: name=dbus state=reloaded enabled=yes
   when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int >= 16
   tags:
@@ -228,11 +228,11 @@
     - nslcd
   when: ansible_distribution == "Ubuntu"
 
-- name: restart dbus again just to be safe for Ubuntu < 16.04
+- name: restart dbus again just to be safe for pre-Ubuntu 16.04
   shell: service dbus restart
   when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int < 16
 
-- name: reload dbus again just to be safe for Ubuntu >= 16.04
+- name: reload dbus again just to be safe for Ubuntu 16.04 and later
   shell: systemctl reload dbus
   when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int >= 16
 
