@@ -53,6 +53,11 @@
   tags:
     - timezone
 
+- name: Restart rsyslog so that logs are written with correct timezone
+  service:
+    name: '{{ SYSLOG_SERVICE_NAME }}'
+    state: restarted
+
 ########
 # MOTD #
 ########
